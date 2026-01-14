@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 
 const styles = {
 	wrapper: {
@@ -18,6 +19,13 @@ const styles = {
 };
 
 const AdminDashboard = () => {
+	// Check for token on component mount; Protect admin routes if no token found;
+	useEffect(() => {
+		//
+		if (!localStorage.getItem("token")) {
+			window.location.href = "/admin/login";
+		}
+	}, []);
 	// retrieve user name from local storage
 	const userName = localStorage.getItem("userName");
 

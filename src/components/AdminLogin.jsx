@@ -30,8 +30,6 @@ export default function AdminLogin() {
 				return;
 			}
 
-			console.log("DATA RECEIVED:", data);
-
 			// Save token
 			localStorage.setItem("token", data.token);
 			// Save user name, create a name field in backend
