@@ -34,52 +34,62 @@ export default function AdminLogin() {
 
 			// Save token
 			localStorage.setItem("token", data.token);
-			// Save user name
+			// Save user name, create a name field in backend
 			localStorage.setItem("userName", data.user.name);
 
 			// Redirect to admin dashboard (you can change this later)
+			// alos need to create admin dashboard page and route
 			window.location.href = "/admin/dashboard";
 		} catch (err) {
-			setError("Network error");
+			setError("Network error", err.message);
 		} finally {
 			setLoading(false);
 		}
 	}
 
 	return (
-		<div style={styles.container}>
-			<h2 style={styles.title}>Admin Login</h2>
+		<div style={styles.wrapper}>
+			<div style={styles.container}>
+				<h2 style={styles.title}>Admin Login</h2>
 
-			<form onSubmit={handleSubmit} style={styles.form}>
-				<input
-					type="email"
-					placeholder="Admin Email"
-					value={email}
-					onChange={(e) => setEmail(e.target.value)}
-					style={styles.input}
-					required
-				/>
+				<form onSubmit={handleSubmit} style={styles.form}>
+					<input
+						type="email"
+						placeholder="Admin Email"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						style={styles.input}
+						required
+					/>
 
-				<input
-					type="password"
-					placeholder="Admin Password"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-					style={styles.input}
-					required
-				/>
+					<input
+						type="password"
+						placeholder="Admin Password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						style={styles.input}
+						required
+					/>
 
-				{error && <p style={styles.error}>{error}</p>}
+					{error && <p style={styles.error}>{error}</p>}
 
-				<button type="submit" style={styles.button} disabled={loading}>
-					{loading ? "Logging in..." : "Login"}
-				</button>
-			</form>
+					<button type="submit" style={styles.button} disabled={loading}>
+						{loading ? "Logging in..." : "Login"}
+					</button>
+				</form>
+			</div>
 		</div>
 	);
 }
 
 const styles = {
+	wrapper: {
+		display: "flex",
+		justifyContent: "center",
+		alignItems: "center",
+		width: "100%",
+		height: "100vh",
+	},
 	container: {
 		maxWidth: "400px",
 		margin: "60px auto",
