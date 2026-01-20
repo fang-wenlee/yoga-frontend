@@ -19,7 +19,7 @@ export default function AdminLogin() {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
 					body: JSON.stringify({ email, password }),
-				}
+				},
 			);
 
 			const data = await res.json();
@@ -32,11 +32,10 @@ export default function AdminLogin() {
 
 			// Save token
 			localStorage.setItem("token", data.token);
-			// Save user name, create a name field in backend
+			// Save user name
 			localStorage.setItem("userName", data.user.name);
 
-			// Redirect to admin dashboard (you can change this later)
-			// alos need to create admin dashboard page and route
+			// Redirect to admin dashboard
 			window.location.href = "/admin/dashboard";
 		} catch (err) {
 			setError("Network error", err.message);

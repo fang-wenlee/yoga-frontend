@@ -1,5 +1,7 @@
 # React + Vite
 
+npm create vite@latest yogaFront
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
@@ -9,7 +11,8 @@ Currently, two official plugins are available:
 
 ## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The React Compiler is not enabled on this template because of its impact on dev & build performa
+nces. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
 ## Expanding the ESLint configuration
 
@@ -20,6 +23,12 @@ If you are developing a production application, we recommend using TypeScript wi
 npm run dev
 
 # Local: http://localhost:5173/
+
+# http://localhost:5173/admin/login
+
+# http://localhost:5173/admin/dashboard
+
+# http://localhost:5173/upload
 
 # activate yoga-back by run: node server
 
