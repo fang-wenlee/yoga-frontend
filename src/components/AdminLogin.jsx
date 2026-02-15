@@ -12,6 +12,7 @@ export default function AdminLogin() {
 		setError("");
 		setLoading(true);
 
+		//This line sends your email + password to your backend login route using a POST request, formatted as JSON, and waits for the backend to respond with success or failure.
 		try {
 			const res = await fetch(
 				"https://yoga-backend-50i3.onrender.com/auth/login",
