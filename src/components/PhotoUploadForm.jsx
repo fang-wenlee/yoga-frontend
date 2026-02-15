@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import InactivityLayer from "../components/InactivityLayer";
+
 const styles = {
 	container: {
 		padding: "40px",
@@ -71,6 +73,14 @@ export default function UploadForm({ onUpload }) {
 	const [image, setImage] = useState(null);
 	const [caption, setCaption] = useState("");
 
+	// Check for token on component mount; Protect admin routes if no token found;
+	useEffect(() => {
+		//
+		if (!localStorage.getItem("token")) {
+			window.location.href = "/admin/login";
+		}
+	}, []);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (!image) return;
@@ -79,41 +89,43 @@ export default function UploadForm({ onUpload }) {
 	};
 
 	return (
-		<div style={styles.container}>
-			{/* Back to Dashboard */}
-			<div style={styles.topBar}>
-				<Link to="/admin/dashboard" style={styles.backButton}>
-					← Back to Dashboard
-				</Link>
+		<InactivityLayer>
+			<div style={styles.container}>
+				{/* Back to Dashboard */}
+				<div style={styles.topBar}>
+					<Link to="/admin/dashboard" style={styles.backButton}>
+						← Back to Dashboard
+					</Link>
+				</div>
+
+				{/* Upload Card */}
+				<div style={styles.card}>
+					<h2 style={styles.title}>Upload a New Yoga Photo</h2>
+
+					<form onSubmit={handleSubmit} style={styles.form}>
+						<label style={styles.label}>Select Image</label>
+						<input
+							type="file"
+							accept="image/*"
+							onChange={(e) => setImage(e.target.files[0])}
+							style={styles.input}
+						/>
+
+						<label style={styles.label}>Caption (optional)</label>
+						<input
+							type="text"
+							placeholder="Write a short caption..."
+							value={caption}
+							onChange={(e) => setCaption(e.target.value)}
+							style={styles.textInput}
+						/>
+
+						<button type="submit" style={styles.primaryButton}>
+							Upload Photo
+						</button>
+					</form>
+				</div>
 			</div>
-
-			{/* Upload Card */}
-			<div style={styles.card}>
-				<h2 style={styles.title}>Upload a New Yoga Photo</h2>
-
-				<form onSubmit={handleSubmit} style={styles.form}>
-					<label style={styles.label}>Select Image</label>
-					<input
-						type="file"
-						accept="image/*"
-						onChange={(e) => setImage(e.target.files[0])}
-						style={styles.input}
-					/>
-
-					<label style={styles.label}>Caption (optional)</label>
-					<input
-						type="text"
-						placeholder="Write a short caption..."
-						value={caption}
-						onChange={(e) => setCaption(e.target.value)}
-						style={styles.textInput}
-					/>
-
-					<button type="submit" style={styles.primaryButton}>
-						Upload Photo
-					</button>
-				</form>
-			</div>
-		</div>
+		</InactivityLayer>
 	);
 }

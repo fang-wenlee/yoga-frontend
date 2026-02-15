@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import InactivityLayer from "../components/InactivityLayer";
 
 const styles = {
 	container: {
@@ -80,32 +81,34 @@ const AdminDashboard = () => {
 		window.location.href = "/admin/login";
 	};
 	return (
-		<div style={styles.container}>
-			<div style={styles.header}>
-				<h2 style={styles.title}>Admin Dashboard</h2>
-				<p style={styles.subtitle}>
-					Welcome back, <b>{userName}</b>
-				</p>
-			</div>
-
-			<div style={styles.grid}>
-				{/* Upload Card */}
-				<div style={styles.card} onClick={() => navigate("/upload")}>
-					<h3 style={styles.cardTitle}>📸 Upload New Image</h3>
-					<p style={styles.cardText}>Add a new yoga photo to your gallery</p>
+		<InactivityLayer>
+			<div style={styles.container}>
+				<div style={styles.header}>
+					<h2 style={styles.title}>Admin Dashboard</h2>
+					<p style={styles.subtitle}>
+						Welcome back, <b>{userName}</b>
+					</p>
 				</div>
 
-				{/* Future card example */}
-				<div style={styles.card} onClick={() => navigate("/gallery-admin")}>
-					<h3 style={styles.cardTitle}>🖼️ Manage Gallery</h3>
-					<p style={styles.cardText}>Edit or delete existing photos</p>
-				</div>
-			</div>
+				<div style={styles.grid}>
+					{/* Upload Card */}
+					<div style={styles.card} onClick={() => navigate("/upload")}>
+						<h3 style={styles.cardTitle}>📸 Upload New Image</h3>
+						<p style={styles.cardText}>Add a new yoga photo to your gallery</p>
+					</div>
 
-			<button onClick={handleLogout} style={styles.logoutButton}>
-				Logout
-			</button>
-		</div>
+					{/* Future card example */}
+					<div style={styles.card} onClick={() => navigate("/gallery-admin")}>
+						<h3 style={styles.cardTitle}>🖼️ Manage Gallery</h3>
+						<p style={styles.cardText}>Edit or delete existing photos</p>
+					</div>
+				</div>
+
+				<button onClick={handleLogout} style={styles.logoutButton}>
+					Logout
+				</button>
+			</div>
+		</InactivityLayer>
 	);
 };
 
