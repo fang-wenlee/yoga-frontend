@@ -37,9 +37,8 @@ export default function UploadPhoto() {
 			if (res.ok) {
 				setStatus("Upload successful!redirecting to gallery...");
 
-				// Optionally, redirect to the gallery or clear the form
+				// redirect to the gallery or clear the form
 				window.location.href = "/admin/dashboard";
-				// or setStatus("Upload successful! Redirecting to gallery...");
 			} else {
 				setStatus(data.error || "Upload failed");
 			}
