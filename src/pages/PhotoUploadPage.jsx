@@ -22,10 +22,14 @@ export default function UploadPhoto() {
 		formData.append("caption", caption);
 
 		try {
+			// is calling from the rendered backend
 			const res = await apiFetch(
 				"https://yoga-backend-50i3.onrender.com/api/photos",
 				{
 					method: "POST",
+					// headers: {
+					// 	Authorization: `Bearer ${localStorage.getItem("token")}`,
+					// },
 					body: formData,
 				},
 			);
@@ -37,9 +41,8 @@ export default function UploadPhoto() {
 			if (res.ok) {
 				setStatus("Upload successful!redirecting to gallery...");
 
-				// Optionally, redirect to the gallery or clear the form
+				// redirect to the gallery or clear the form
 				window.location.href = "/admin/dashboard";
-				// or setStatus("Upload successful! Redirecting to gallery...");
 			} else {
 				setStatus(data.error || "Upload failed");
 			}

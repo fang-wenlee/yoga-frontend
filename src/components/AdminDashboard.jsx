@@ -98,7 +98,7 @@ const AdminDashboard = () => {
 					</div>
 
 					{/* Future card example */}
-					<div style={styles.card} onClick={() => navigate("/gallery-admin")}>
+					<div style={styles.card} onClick={() => navigate("/gallery")}>
 						<h3 style={styles.cardTitle}>🖼️ Manage Gallery</h3>
 						<p style={styles.cardText}>Edit or delete existing photos</p>
 					</div>
