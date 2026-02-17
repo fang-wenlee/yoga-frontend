@@ -22,10 +22,14 @@ export default function UploadPhoto() {
 		formData.append("caption", caption);
 
 		try {
+			// is calling from the rendered backend
 			const res = await apiFetch(
 				"https://yoga-backend-50i3.onrender.com/api/photos",
 				{
 					method: "POST",
+					// headers: {
+					// 	Authorization: `Bearer ${localStorage.getItem("token")}`,
+					// },
 					body: formData,
 				},
 			);
