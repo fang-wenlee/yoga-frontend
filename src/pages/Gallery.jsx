@@ -23,6 +23,35 @@ export default function Gallery() {
 		fetchPhotos();
 	}, []);
 
+	const handleDelete = async (public_id) => {
+		console.log("Attempting to delete:", public_id);
+		const confirmDelete = window.confirm("Delete this photo?");
+		if (!confirmDelete) return;
+
+		try {
+			const res = await fetch(
+				`http://localhost:5000/api/photos/cloudinary/${public_id}`,
+				{
+					method: "DELETE",
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem("token")}`,
+					},
+				},
+			);
+
+			const data = await res.json();
+
+			if (res.ok) {
+				// Remove from UI instantly
+				setPhotos((prev) => prev.filter((p) => p.public_id !== public_id));
+			} else {
+				alert(data.error || "Delete failed");
+			}
+		} catch (err) {
+			alert("Network error", err);
+		}
+	};
+
 	return (
 		<div style={{ padding: "24px" }}>
 			{/* Header Bar */}
@@ -100,6 +129,21 @@ export default function Gallery() {
 								alt=""
 								style={{ width: "100%", height: "auto", display: "block" }}
 							/>
+							<button
+								style={{
+									// position: "absolute",
+									top: "8px",
+									right: "8px",
+									background: "rgba(255,255,255,0.8)",
+									border: "none",
+									borderRadius: "50%",
+									padding: "6px",
+									cursor: "pointer",
+								}}
+								onClick={() => handleDelete(photo.public_id)}
+							>
+								🗑️
+							</button>
 						</div>
 					))}
 				</div>
