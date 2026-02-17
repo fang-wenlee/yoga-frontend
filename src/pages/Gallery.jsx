@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ImageCard from "../components/ImageCard";
 
 /*
     This page is for admin users to view and manage the gallery photos.
@@ -124,89 +125,14 @@ export default function Gallery() {
 					onClick={(e) => e.stopPropagation()} // don't close menu when clicking inside grid container
 				>
 					{photos.map((photo) => (
-						<div
+						<ImageCard
 							key={photo.public_id}
-							style={{
-								position: "relative",
-								borderRadius: "10px",
-								overflow: "hidden",
-								boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-							}}
-							onClick={(e) => e.stopPropagation()} // keep clicks local to card
-						>
-							<img
-								src={photo.secure_url}
-								alt=""
-								style={{ width: "100%", height: "auto", display: "block" }}
-							/>
-
-							{/* Three-dot circular menu button */}
-							<div style={{ position: "absolute", top: "8px", right: "8px" }}>
-								<button
-									onClick={(e) => {
-										e.stopPropagation();
-										setActiveMenuId((prev) =>
-											prev === photo.public_id ? null : photo.public_id,
-										);
-									}}
-									style={{
-										background: "rgba(0,0,0,0.55)",
-										color: "white",
-										border: "none",
-										borderRadius: "50%",
-										width: "32px",
-										height: "32px",
-										display: "flex",
-										alignItems: "center",
-										justifyContent: "center",
-										cursor: "pointer",
-										fontSize: "18px",
-										backdropFilter: "blur(4px)",
-									}}
-								>
-									⋮
-								</button>
-
-								{activeMenuId === photo.public_id && (
-									<div
-										onClick={(e) => e.stopPropagation()}
-										style={{
-											position: "absolute",
-											top: "36px",
-											right: 0,
-											background: "white",
-											borderRadius: "6px",
-											boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
-											padding: "6px 0",
-											minWidth: "140px",
-											zIndex: 20,
-										}}
-									>
-										<button
-											onClick={(e) => {
-												e.stopPropagation();
-												handleDelete(photo.public_id);
-											}}
-											style={{
-												width: "100%",
-												padding: "10px 14px",
-												display: "flex",
-												alignItems: "center",
-												gap: "10px",
-												background: "none",
-												border: "none",
-												cursor: "pointer",
-												fontSize: "14px",
-												color: "#d9534f",
-											}}
-										>
-											<span style={{ fontSize: "16px" }}>🗑️</span>
-											<span>Delete</span>
-										</button>
-									</div>
-								)}
-							</div>
-						</div>
+							photo={photo}
+							isMenuOpen={activeMenuId === photo.public_id}
+							onOpenMenu={(id) => setActiveMenuId(id)}
+							onCloseMenu={() => setActiveMenuId(null)}
+							onDelete={handleDelete}
+						/>
 					))}
 				</div>
 			)}
