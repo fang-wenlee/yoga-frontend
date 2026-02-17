@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+/*
+    This page is for admin users to view and manage the gallery photos.
+*/
 export default function Gallery() {
 	const [photos, setPhotos] = useState([]);
 	const [loading, setLoading] = useState(true);
