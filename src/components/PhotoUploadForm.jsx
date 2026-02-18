@@ -1,22 +1,19 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import InactivityLayer from "../components/InactivityLayer";
 
 const styles = {
 	container: {
 		padding: "40px",
-		minHeight: "100vh",
+		minHeight: "50vh",
 		backgroundColor: "#f7f7f7",
 		fontFamily: "sans-serif",
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
 	},
-	topBar: {
-		width: "100%",
-		marginBottom: "20px",
-	},
+
 	backButton: {
 		textDecoration: "none",
 		color: "#444",
@@ -92,11 +89,11 @@ export default function UploadForm({ onUpload }) {
 		<InactivityLayer>
 			<div style={styles.container}>
 				{/* Back to Dashboard */}
-				<div style={styles.topBar}>
+				{/* <div style={styles.topBar}>
 					<Link to="/admin/dashboard" style={styles.backButton}>
 						← Back to Dashboard
 					</Link>
-				</div>
+				</div> */}
 
 				{/* Upload Card */}
 				<div style={styles.card}>
