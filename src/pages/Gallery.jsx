@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ImageCard from "../components/ImageCard";
+import GalleryHeader from "../components/GalleryHeader";
 
 /*
     This page is for admin users to view and manage the gallery photos.
@@ -64,49 +65,7 @@ export default function Gallery() {
 			onClick={() => setActiveMenuId(null)} // click on background closes any menu
 		>
 			{/* Header Bar */}
-			<div
-				style={{
-					display: "flex",
-					justifyContent: "space-between",
-					alignItems: "center",
-					marginBottom: "24px",
-				}}
-			>
-				<div>
-					<h2 style={{ margin: 0 }}>Manage Gallery</h2>
-					<p style={{ margin: "4px 0 0 0", color: "#666" }}>
-						View and manage uploaded yoga photos
-					</p>
-				</div>
-
-				<div style={{ display: "flex", gap: "12px" }}>
-					<button
-						style={{
-							padding: "8px 14px",
-							borderRadius: "6px",
-							border: "1px solid #ddd",
-							background: "#f7f7f7",
-							cursor: "pointer",
-						}}
-						onClick={() => (window.location.href = "/admin/dashboard")}
-					>
-						Back to Dashboard
-					</button>
-
-					<button
-						style={{
-							padding: "8px 14px",
-							borderRadius: "6px",
-							border: "1px solid #ddd",
-							background: "#fff",
-							cursor: "pointer",
-						}}
-						onClick={() => window.location.reload()}
-					>
-						Refresh
-					</button>
-				</div>
-			</div>
+			<GalleryHeader />
 
 			{/* Loading State */}
 			{loading && <div>Loading gallery...</div>}
