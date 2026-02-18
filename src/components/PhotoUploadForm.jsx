@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 // import { Link } from "react-router-dom";
 
 import InactivityLayer from "../components/InactivityLayer";
+import Spinner from "./Spinner";
 
 const styles = {
 	container: {
@@ -66,7 +67,7 @@ const styles = {
 		transition: "background-color 0.2s ease",
 	},
 };
-export default function UploadForm({ onUpload }) {
+export default function UploadForm({ onUpload, status }) {
 	const [image, setImage] = useState(null);
 	const [caption, setCaption] = useState("");
 
@@ -117,8 +118,21 @@ export default function UploadForm({ onUpload }) {
 							style={styles.textInput}
 						/>
 
-						<button type="submit" style={styles.primaryButton}>
-							Upload Photo
+						<button
+							type="submit"
+							style={styles.primaryButton}
+							disabled={status === "Uploading..."}
+						>
+							{status === "Uploading" ? (
+								<div
+									style={{ display: "flex", alignItems: "center", gap: "8px" }}
+								>
+									<Spinner size={16} color="white" />
+									Uploading...
+								</div>
+							) : (
+								"Upload Photo"
+							)}
 						</button>
 					</form>
 				</div>
