@@ -14,9 +14,9 @@ export default function GalleryHeader() {
 			}}
 		>
 			<div>
-				<h2 style={{ margin: 0 }}>Manage Gallery</h2>
+				<h2 style={{ margin: 0 }}>Manage Fawn Gallery</h2>
 				<p style={{ margin: "4px 0 0 0", color: "#666" }}>
-					View and manage uploaded yoga photos
+					View and manage uploaded photos
 				</p>
 			</div>
 

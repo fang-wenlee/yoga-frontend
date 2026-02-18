@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import UploadForm from "../components/PhotoUploadForm";
 import { apiFetch } from "../utils/apiFetch";
-
+import GalleryHeader from "../components/GalleryHeader";
 import { Link } from "react-router-dom";
 
 export default function UploadPhoto() {
@@ -52,10 +52,12 @@ export default function UploadPhoto() {
 	};
 
 	return (
-		<div style={{ maxWidth: "400px", margin: "auto", padding: "2rem" }}>
-			<h2>Upload a New Photo</h2>
-			<UploadForm onUpload={handleUpload} />
-			<p>{status}</p>
+		<div>
+			<GalleryHeader />
+			<div style={{ maxWidth: "400px", margin: "auto", padding: "2rem" }}>
+				<UploadForm onUpload={handleUpload} />
+				<p>{status}</p>
+			</div>
 		</div>
 	);
 }
