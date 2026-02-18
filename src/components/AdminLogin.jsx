@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Spinner from "./Spinner";
 
 export default function AdminLogin() {
 	const [email, setEmail] = useState("");
@@ -46,37 +47,48 @@ export default function AdminLogin() {
 	}
 
 	return (
-		<div style={styles.wrapper}>
-			<div style={styles.container}>
-				<h2 style={styles.title}>Admin Login</h2>
+		<>
+			<div style={styles.wrapper}>
+				<div style={styles.container}>
+					<h2 style={styles.title}>Admin Login</h2>
 
-				<form onSubmit={handleSubmit} style={styles.form}>
-					<input
-						type="email"
-						placeholder="Admin Email"
-						value={email}
-						onChange={(e) => setEmail(e.target.value)}
-						style={styles.input}
-						required
-					/>
+					<form onSubmit={handleSubmit} style={styles.form}>
+						<input
+							type="email"
+							placeholder="Admin Email"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							style={styles.input}
+							required
+						/>
 
-					<input
-						type="password"
-						placeholder="Admin Password"
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-						style={styles.input}
-						required
-					/>
+						<input
+							type="password"
+							placeholder="Admin Password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							style={styles.input}
+							required
+						/>
 
-					{error && <p style={styles.error}>{error}</p>}
+						{error && <p style={styles.error}>{error}</p>}
 
-					<button type="submit" style={styles.button} disabled={loading}>
-						{loading ? "Logging in..." : "Login"}
-					</button>
-				</form>
+						<button type="submit" style={styles.button} disabled={loading}>
+							{loading ? (
+								<div
+									style={{ display: "flex", alignItems: "center", gap: "8px" }}
+								>
+									<Spinner size={16} color="white" border={3} />
+									Logging in...
+								</div>
+							) : (
+								"Login"
+							)}
+						</button>
+					</form>
+				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 
