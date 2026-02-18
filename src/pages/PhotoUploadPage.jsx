@@ -15,7 +15,7 @@ export default function UploadPhoto() {
 	}, []);
 
 	const handleUpload = async (image, caption) => {
-		setStatus("Uploading...");
+		setStatus("Uploading");
 
 		const formData = new FormData();
 		formData.append("image", image);
@@ -42,7 +42,7 @@ export default function UploadPhoto() {
 				setStatus("Upload successful!redirecting to gallery...");
 
 				// redirect to the gallery or clear the form
-				window.location.href = "/admin/dashboard";
+				window.location.href = "/gallery";
 			} else {
 				setStatus(data.error || "Upload failed");
 			}
@@ -55,8 +55,9 @@ export default function UploadPhoto() {
 		<div>
 			<GalleryHeader />
 			<div style={{ maxWidth: "400px", margin: "auto", padding: "2rem" }}>
-				<UploadForm onUpload={handleUpload} />
-				<p>{status}</p>
+				<UploadForm onUpload={handleUpload} status={status} />
+
+				{/* <p>{status} ***</p> */}
 			</div>
 		</div>
 	);
