@@ -27,6 +27,17 @@ export default function Gallery() {
 		fetchPhotos();
 	}, []);
 
+	useEffect(() => {
+		function handleEsc(e) {
+			if (e.key === "Escape") {
+				setActiveMenuId(null);
+			}
+		}
+
+		window.addEventListener("keydown", handleEsc);
+		return () => window.removeEventListener("keydown", handleEsc);
+	}, []);
+
 	const handleDelete = async (public_id) => {
 		console.log("Delete clicked for:", public_id);
 		const confirmDelete = window.confirm("Delete this photo?");
