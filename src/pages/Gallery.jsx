@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ImageCard from "../components/ImageCard";
+import ImageModal from "../components/ImageModal";
 import GalleryHeader from "../components/GalleryHeader";
 
 /*
     This page is for admin users to view and manage the gallery photos.
 */
 export default function Gallery() {
+	const [selectedImage, setSelectedImage] = useState(null);
 	const [photos, setPhotos] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [activeMenuId, setActiveMenuId] = useState(null); // which photo's menu is open
@@ -31,6 +33,7 @@ export default function Gallery() {
 		function handleEsc(e) {
 			if (e.key === "Escape") {
 				setActiveMenuId(null);
+				setSelectedImage(null); // ⭐ close image modal
 			}
 		}
 
@@ -102,10 +105,17 @@ export default function Gallery() {
 							onOpenMenu={(id) => setActiveMenuId(id)}
 							onCloseMenu={() => setActiveMenuId(null)}
 							onDelete={handleDelete}
+							onSelect={() => setSelectedImage(photo)}
 						/>
 					))}
 				</div>
 			)}
+
+			{/* ⭐ Image Modal goes here — OUTSIDE the grid, but INSIDE the page */}
+			<ImageModal
+				image={selectedImage}
+				onClose={() => setSelectedImage(null)}
+			/>
 		</div>
 	);
 }

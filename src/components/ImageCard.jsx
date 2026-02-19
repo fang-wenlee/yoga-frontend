@@ -17,6 +17,7 @@ export default function ImageCard({
 	onOpenMenu,
 	onCloseMenu,
 	onDelete,
+	onSelect,
 }) {
 	return (
 		<div
@@ -32,6 +33,7 @@ export default function ImageCard({
 				src={photo.secure_url}
 				alt=""
 				style={{ width: "100%", height: "auto", display: "block" }}
+				onClick={() => onSelect(photo)}
 			/>
 
 			{/* Three-dot circular menu button */}
