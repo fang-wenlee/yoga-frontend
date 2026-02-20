@@ -14,10 +14,29 @@ export default function Gallery() {
 	const [activeMenuId, setActiveMenuId] = useState(null); // which photo's menu is open
 
 	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (!token) {
+			window.location.href = "/admin/login";
+		}
+	}, []);
+
+	useEffect(() => {
 		async function fetchPhotos() {
 			try {
-				const res = await fetch("http://localhost:5000/api/photos/cloudinary");
+				const res = await fetch("http://localhost:5000/api/photos/cloudinary", {
+					headers: {
+						Authorization: `Bearer ${localStorage.getItem("token")}`,
+					},
+				});
+
 				const data = await res.json();
+
+				if (res.status === 401) {
+					localStorage.removeItem("token");
+					window.location.href = "/admin/login";
+					return;
+				}
+
 				setPhotos(data);
 			} catch (err) {
 				console.error("Error fetching photos:", err);
